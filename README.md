@@ -208,8 +208,8 @@ X, Z, A, Y, T, censor_delta= generate_data(n=10000, m=20, p=1, beta_0=0.4, h_2=0
 # uncensored data simulation
 
 result_noncensor = mawiisurv.mawii_noncensor(X, Z, A, T, 
-                          model_types=['neural_network','linear_regression','random_forest','xgboost'],
-                          rho_function_names=['ET','EL','CUE'],
+                          model_types=['neural_network'], # options:  ['neural_network','linear_regression','random_forest','xgboost'],
+                          rho_function_names=['ET'], # options: ['ET','EL','CUE'],
                           device = device)
 
 print(f"DNN+ET BETA: {result_noncensor['neural_network']['ET']['beta']:.3f}")
@@ -220,8 +220,8 @@ print(f"DNN+ET over-identification test: {result_noncensor['neural_network']['ET
 # right-censor data simulation
 
 result_censor = mawiisurv.mawii_censor(X, Z, A, Y, censor_delta, h = 4,
-                                          model_types=['neural_network'],
-                                          rho_function_names=['ET'],
+                                           model_types=['neural_network'], # options:  ['neural_network','linear_regression','random_forest','xgboost'],
+                                           rho_function_names=['ET'], # options: ['ET','EL','CUE'],
                                           device = device)
 
 print(f"DNN+ET BETA: {result_censor['neural_network']['ET']['beta']:.3f}")
