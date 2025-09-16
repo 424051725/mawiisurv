@@ -26,25 +26,26 @@ Install from PyPI:
 
 ```bash
 pip install mawiisurv
+```
 
-
-
+---
 ## Dependencies
+
 Make sure you have the following installed (the minimal compatible versions shown):
-numpy>=1.19
-torch>=1.8
-scipy>=1.5
-scikit-learn>=0.24
-xgboost>=1.3
-numba>=0.53
+- numpy>=1.19
+- torch>=1.8
+- scipy>=1.5
+- scikit-learn>=0.24
+- xgboost>=1.3
+- numba>=0.53
 
 If you plan to use GPU, please install a CUDA-compatible PyTorch from the official download page before installing this package.
 
-
+---
 ## Quick start
 
 A runnable demo is provided below. It simulates both non-censored and right-censored data, fits the DNN + ET specification, and prints the point estimate, standard error, and the over-identification test statistic.
-
+```
 # demo
 # pip install mawiisurv
 
@@ -141,11 +142,11 @@ print(f"DNN+ET SE: {result_censor['neural_network']['ET']['se']:.3f}")
 print(f"DNN+ET over-identification test: {result_censor['neural_network']['ET']['test']:.3f}")
 
 
-
-
+```
+---
 ## API
 
-mawii_noncensor(
+- mawii_noncensor(
     X, Z, A, Y,
     model_types=['neural_network'],
     rho_function_names=['ET'],
@@ -160,7 +161,7 @@ mawii_noncensor(
     shuffle=False,
     device='cpu',
 ) -> dict
-mawii_censor(
+- mawii_censor(
     X, Z, A, Y, censor_delta, h=1,
     model_types=['neural_network'],
     rho_function_names=['ET'],
@@ -176,27 +177,30 @@ mawii_censor(
     device='cpu',
 ) -> dict
 
+---
 ## Arguments
 
-X array of shape n by p, baseline covariates
+- X: array of shape n by p, baseline covariates
 
-Z array of shape n by m, instrumental variables
+- Z: array of shape n by m, instrumental variables
 
-A array of shape n, treatment
+- A: array of shape n, treatment
 
-Y array of shape n, outcome
+- Y: array of shape n, outcome
 
-censor_delta array of shape n, 1 uncensored and 0 censored, only for mawii_censor
+- censor_delta: array of shape n, 1 uncensored and 0 censored, only for mawii_censor
 
-h scalar, window for local Kaplan–Meier in censoring adjustment
+- h: scalar, window for local Kaplan–Meier in censoring adjustment
 
-model_types list of model backends, choose from neural_network, linear_regression, random_forest, xgboost
+- model_types: list of model backends, choose from neural_network, linear_regression, random_forest, xgboost
 
-rho_function_names list of GEL score types, choose from ET, EL, CUE
+- rho_function_names: list of GEL score types, choose from ET, EL, CUE
 
-device cpu or cuda device string such as cuda:0
+- device: cpu or cuda device string such as cuda:0
 
+---
 ## Return values:
+```
 {
   'neural_network': {
     'ET': {
@@ -210,3 +214,4 @@ device cpu or cuda device string such as cuda:0
   'linear_regression': {...},
   ...
 }
+```
