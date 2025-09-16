@@ -195,8 +195,8 @@ print(f"DNN+ET over-identification test: {result_censor['neural_network']['ET'][
 ```
 ---
 ## API
-
-- mawii_noncensor(
+```
+mawii_noncensor(
     X, Z, A, Y,
     model_types=['neural_network'],
     rho_function_names=['ET'],
@@ -211,7 +211,7 @@ print(f"DNN+ET over-identification test: {result_censor['neural_network']['ET'][
     shuffle=False,
     device='cpu',
 ) -> dict
-- mawii_censor(
+mawii_censor(
     X, Z, A, Y, censor_delta, h=1,
     model_types=['neural_network'],
     rho_function_names=['ET'],
@@ -226,7 +226,7 @@ print(f"DNN+ET over-identification test: {result_censor['neural_network']['ET'][
     shuffle=False,
     device='cpu',
 ) -> dict
-
+```
 ---
 ## Arguments
 
@@ -295,8 +295,9 @@ BibTeX:
 ```
 
 ## Contributing
-Issues and pull requests are welcome!
-Please open a discussion for feature requests or API changes.
+
+Contributions are welcome!  
+Please use Issues for bug reports and pull requests for code contributions. 
 
 ## License
 MIT License — see LICENSE for details.
