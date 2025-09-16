@@ -1,9 +1,87 @@
-# mawiisurv
+# MAWII-SURV
 
-`mawiisurv` implements G‐estimation methods for treatment effects under endogeneity, both with and without right‐censoring, using a variety of machine‐learning and classical estimators.
+# MAWII-Surv
+
+> Semiparametric causal inference for right-censored outcomes with many weak or invalid instruments, powered by the GEL-NOW framework.
+
+[![PyPI](https://img.shields.io/pypi/v/mawiisurv.svg)](https://pypi.org/project/mawiisurv/)
+[![Python](https://img.shields.io/pypi/pyversions/mawiisurv.svg)](https://pypi.org/project/mawiisurv/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
+MAWII-Surv (MAny Weak and Invalid Instruments for Survival outcomes) implements **GEL-NOW**: Generalized Empirical Likelihood with **N**on-**O**rthogonal and **W**eak moments. It extends classical GEL to non-orthogonal nuisance settings and allows many weak or invalid IVs under right-censoring.
 
 ---
 
+## Table of Contents
+- [Why MAWII-Surv?](#why-mawii-surv)
+- [Features](#features)
+- [Installation](#installation)
+- [Dependencies](#dependencies)
+- [Quick Start](#quick-start)
+- [API](#api)
+- [Arguments](#arguments)
+- [Return Values](#return-values)
+- [Notes & Tips](#notes)
+- [Citation](#citation)
+- [Contributing](#contributing)
+- [License](#license)
+
+---
+
+## Why MAWII-Surv?
+
+- **Survival + Endogeneity:** G-estimation for treatment effects with right-censoring and unmeasured confounding.  
+- **Many Weak/Invalid IVs:** Robust to weak instruments and horizontal pleiotropy.  
+- **GEL-NOW (GEL 2.0):** ET, EL, CUE with theory for **non-orthogonal** nuisances.  
+- **Modern ML Nuisances:** Deep neural nets (PyTorch), Random Forests, XGBoost, plus linear models.  
+- **Diagnostics:** Censoring-adjusted over-identification test; standard errors account for censoring-induced variance.
+
+---
+
+## Features
+
+- **Uncensored data**: `mawii_noncensor`  
+- **Right-censoring**: `mawii_censor`  
+- **Model backends**:
+  - neural_network, linear_regression, random_forest, xgboost
+- **GEL score families**:
+  - ET, EL, CUE
+
+---
+
+## Installation
+
+```bash
+pip install mawiisurv
+
+
+
+Introduction to MAWII-Surv
+
+MAWII-Surv (MAny Weak and Invalid Instruments for Survival outcomes) is a Python package for semiparametric causal inference with right-censored outcomes in the presence of many weak or invalid instruments. The package implements the novel GEL-NOW (Generalized Empirical Likelihood with Non-Orthogonal and Weak moments, or GEL 2.0) framework, which extends classical generalized empirical likelihood to settings where nuisance functions enter non-orthogonally and where instruments may be weak or invalid.
+
+Key features include:
+
+- Heteroscedasticity-based identification under an accelerated failure time (AFT) model, enabling causal effect estimation even with invalid instruments.
+
+- Flexible nuisance estimation using modern machine learning methods, including deep neural networks, to capture complex nonlinear structures.
+
+- Robust inference that explicitly accounts for additional variance from non-orthogonal nuisances, ensuring valid confidence intervals.
+
+- Diagnostics such as a censoring-adjusted over-identification test to assess instrument validity.
+
+- Applications to biobank-scale data, with built-in support for analyzing time-to-event outcomes such as disease onset.
+
+
+With simulation tools, diagnostic functions, and real-data examples, MAWII-Surv provides a user-friendly platform for researchers in statistics, econometrics, epidemiology, and genetics to conduct reliable causal inference from censored survival data
+
+## Why MAWII-Surv?
+
+- **Survival + Endogeneity:** G-estimation for treatment effects with right-censoring and unmeasured confounding.
+- **Many Weak/Invalid IVs:** Robust to weak instruments and horizontal pleiotropy.
+- **GEL 2.0 (GEL-NOW):** Empirical Likelihood (EL), Exponential Tilting (ET), and Continuous Updating (CUE) with theory for **non-orthogonal nuisances**.
+- **Modern ML Nuisances:** Deep neural nets (PyTorch), Random Forests, XGBoost, plus classical linear models.
+- **Diagnostics:** Over-identification test adapted to censoring; standard errors account for censoring-induced variance inflation.
 ## Features
 
 - **Uncensor‐data** (`mawii_noncensor`)  
@@ -215,3 +293,39 @@ print(f"DNN+ET over-identification test: {result_censor['neural_network']['ET'][
   ...
 }
 ```
+
+## Notes
+
+- We generally recommend ET or EL over CUE under weak identification.
+
+- Deep NNs tend to be most robust for complex nonlinear nuisances; RF/XGB are strong baselines in moderate dimensions.
+
+- Under censoring, standard errors include an extra variance component due to estimating the censoring distribution.
+
+## Citation:
+
+If you use MAWII-Surv, please cite:
+```
+Bu Q., Su W., Zhao X., Liu Z. (2025).
+Semiparametric Causal Inference for Right-Censored Outcomes with Many Weak Invalid Instruments.
+(manuscript)
+```
+
+BibTeX:
+```
+@misc{mawiisurv2025,
+  title   = {Semiparametric Causal Inference for Right-Censored Outcomes with Many Weak Invalid Instruments},
+  author  = {Bu, Qiushi and Su, Wen and Zhao, Xingqiu and Liu, Zhonghua},
+  year    = {2025},
+  note    = {Python package: MAWII-Surv},
+  howpublished = {\url{https://pypi.org/project/mawiisurv/}}
+}
+```
+
+## Contributing
+Issues and pull requests are welcome!
+Please open a discussion for feature requests or API changes.
+
+## License
+MIT License — see LICENSE for details.
+
